@@ -180,6 +180,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       android:visibility="invisible"
       android:text="" />
 
+    <Button
+        android:id="@+id/variableControlInitButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/textGamepad1"
+        android:layout_alignParentEnd="true"
+        android:text="Variables" />
+
   </RelativeLayout>
 
   <WebView

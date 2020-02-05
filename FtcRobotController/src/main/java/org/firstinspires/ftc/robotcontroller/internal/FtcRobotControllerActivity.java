@@ -31,6 +31,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 package org.firstinspires.ftc.robotcontroller.internal;
 
+
+import org.firstinspires.ftc.robotcontroller.teamcode.VariableControlActivity;
+import org.firstinspires.ftc.robotcontroller.teamcode.Variables;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ComponentName;
@@ -100,6 +104,7 @@ import org.firstinspires.ftc.ftccommon.internal.FtcRobotControllerWatchdogServic
 import org.firstinspires.ftc.ftccommon.internal.ProgramAndManageActivity;
 import org.firstinspires.ftc.onbotjava.OnBotJavaHelperImpl;
 import org.firstinspires.ftc.onbotjava.OnBotJavaProgrammingMode;
+import org.firstinspires.ftc.robotcontroller.teamcode.*;
 import org.firstinspires.ftc.robotcore.external.navigation.MotionDetection;
 import org.firstinspires.ftc.robotcore.internal.hardware.android.AndroidBoard;
 import org.firstinspires.ftc.robotcore.internal.network.DeviceNameManagerFactory;
@@ -380,6 +385,15 @@ public class FtcRobotControllerActivity extends Activity
     if (preferencesHelper.readBoolean(getString(R.string.pref_wifi_automute), false)) {
       initWifiMute(true);
     }
+        final Intent intent2 = new Intent(this, VariableControlActivity.class);
+    findViewById(R.id.variableControlInitButton).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startActivity(intent2);
+      }
+    });
+
+    Variables.INSTANCE.init(this);
   }
 
   protected UpdateUI createUpdateUI() {

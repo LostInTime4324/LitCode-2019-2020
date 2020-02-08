@@ -185,6 +185,8 @@ public class BlueAutoDoubleStone extends LinearOpMode {
         leftDropper.setPosition(180);
 
 
+
+
         encoderDrive(NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), 0.8, 0.8, 0.8, 0.8);
 
         //This does the work to detect the skystone using the color sensor
@@ -246,6 +248,7 @@ public class BlueAutoDoubleStone extends LinearOpMode {
         elevatorTilt.setPower(0);
 
 
+
         encoderDrive(-(NumberVariable.DRIVE_TO_STONE.getNumber() + 1), -(NumberVariable.DRIVE_TO_STONE.getNumber() + 1), -(NumberVariable.DRIVE_TO_STONE.getNumber() + 1), -(NumberVariable.DRIVE_TO_STONE.getNumber() + 1), -1.0, -1.0, -1.0, -1.0);
 
         greenWheelLeftIntake.setPower(0);
@@ -259,6 +262,8 @@ public class BlueAutoDoubleStone extends LinearOpMode {
 
         greenWheelLeftIntake.setPower(-1.0);
         greenWheelRightIntake.setPower(1.0);
+
+
 
         gyroTurn(0.7, -NumberVariable.TURN_PARK.getNumber());
 

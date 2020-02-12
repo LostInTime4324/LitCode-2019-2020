@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.*;
 import org.firstinspires.ftc.robotcore.external.tfod.*;
 
 
-@Autonomous(name="BlueAutoParkOnly", group="Pushbot")
+//@Autonomous(name="BlueAutoParkOnly", group="Pushbot")
 public class BlueAutoParkOnly extends LinearOpMode {
 
     //Some lazily declared navigation variables(Jank as heck)

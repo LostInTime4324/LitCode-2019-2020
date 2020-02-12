@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcontroller.teamcode.*;
 import org.firstinspires.ftc.robotcore.external.navigation.*;
 import org.firstinspires.ftc.robotcore.external.tfod.*;
 
-@Autonomous(name="RedAutoParkOnly", group="RedSide")
+//@Autonomous(name="RedAutoParkOnly", group="RedSide")
 
 public class RedAutoParkOnly extends LinearOpMode {
 

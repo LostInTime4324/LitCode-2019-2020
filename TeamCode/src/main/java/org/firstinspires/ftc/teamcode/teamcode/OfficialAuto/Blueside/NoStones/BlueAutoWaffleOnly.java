@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcontroller.teamcode.*;
 import org.firstinspires.ftc.robotcore.external.navigation.*;
 import org.firstinspires.ftc.robotcore.external.tfod.*;
 
-@Autonomous(name="BlueAutoWaffleOnly", group="Pushbot")
+//@Autonomous(name="BlueAutoWaffleOnly", group="Pushbot")
 
 public class BlueAutoWaffleOnly extends LinearOpMode {
 
@@ -189,82 +189,82 @@ public class BlueAutoWaffleOnly extends LinearOpMode {
         frontLeftDrive.setPower(1.0);
         backLeftDrive.setPower(1.0);
 
-        encoderDrive(NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), 0.8, 0.8, 0.8, 0.8);
-
-        //This does the work to detect the skystone using the color sensor
-        while (hsvValues[0] < 99) {
-            if (BooleanVariable.BLUE_SIDE.getBoolean()) {
-
-                int y = -1;
-
-            }
-            frontLeftDrive.setPower(- NumberVariable.SLIDE_SPEED.getNumber());
-            backLeftDrive.setPower( NumberVariable.SLIDE_SPEED.getNumber());
-            frontRightDrive.setPower( NumberVariable.SLIDE_SPEED.getNumber());
-            backRightDrive.setPower(- NumberVariable.SLIDE_SPEED.getNumber());
-
-            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR), (int) (sensorColor.green() * SCALE_FACTOR), (int) (sensorColor.blue() * SCALE_FACTOR), hsvValues);
-
-            telemetry.addData("Stone", "Not detected");
-
-            x++;
-
-            telemetry.addData("x-value", x);
-
-            telemetry.addData("hsv", hsvValues[0]);
-
-            telemetry.update();
-        }
+//        encoderDrive(NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), 0.8, 0.8, 0.8, 0.8);
+//
+//        //This does the work to detect the skystone using the color sensor
+//        while (hsvValues[0] < 99) {
+//            if (BooleanVariable.BLUE_SIDE.getBoolean()) {
+//
+//                int y = -1;
+//
+//            }
+//            frontLeftDrive.setPower(- NumberVariable.SLIDE_SPEED.getNumber());
+//            backLeftDrive.setPower( NumberVariable.SLIDE_SPEED.getNumber());
+//            frontRightDrive.setPower( NumberVariable.SLIDE_SPEED.getNumber());
+//            backRightDrive.setPower(- NumberVariable.SLIDE_SPEED.getNumber());
+//
+//            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR), (int) (sensorColor.green() * SCALE_FACTOR), (int) (sensorColor.blue() * SCALE_FACTOR), hsvValues);
+//
+//            telemetry.addData("Stone", "Not detected");
+//
+//            x++;
+//
+//            telemetry.addData("x-value", x);
+//
+//            telemetry.addData("hsv", hsvValues[0]);
+//
+//            telemetry.update();
+//        }
 
         frontLeftDrive.setPower(0);
         backLeftDrive.setPower(0);
         frontRightDrive.setPower(0);
         backRightDrive.setPower(0);
 
-        if (x < 12) {
-
-            distance = -NumberVariable.FIRST_DISTANCE_TO_WAFFLE.getNumber();
-
-        } else if (x >= 12 && x < 50) {
-
-            distance = -NumberVariable.SECOND_DISTANCE_TO_WAFFLE.getNumber();
-
-        } else if (x >= 50) {
-
-            distance = -NumberVariable.THIRD_DISTANCE_TO_WAFFLE.getNumber();
-
-        } else {
-
-            distance = -NumberVariable.THIRD_DISTANCE_TO_WAFFLE.getNumber();
-
-        }
-
-//        encoderDrive( NumberVariable.SLIDE_CORRECTION.getNumber(), - NumberVariable.SLIDE_CORRECTION.getNumber(), - NumberVariable.SLIDE_CORRECTION.getNumber(),  NumberVariable.SLIDE_CORRECTION.getNumber(),  0.5, - 0.5, - 0.5,  0.5);
-
-        gyroTurn(0.5, NumberVariable.FIRST_TURN.getNumber());
-
-        greenWheelLeftIntake.setPower(1.0);
-        greenWheelRightIntake.setPower(-1.0);
-
-        encoderDrive(NumberVariable.DRIVE_TO_STONE.getNumber(), NumberVariable.DRIVE_TO_STONE.getNumber(), NumberVariable.DRIVE_TO_STONE.getNumber(), NumberVariable.DRIVE_TO_STONE.getNumber(), 0.5, 0.5, 0.5, 0.5);
-
-        clawServo.setPosition(0.5);
-        elevatorTilt.setPower(-1.0);
-        Thread.sleep(200);
-        elevatorTilt.setPower(0);
-
-
-        encoderDrive(-NumberVariable.DRIVE_TO_STONE.getNumber(), -NumberVariable.DRIVE_TO_STONE.getNumber(), -NumberVariable.DRIVE_TO_STONE.getNumber(), -NumberVariable.DRIVE_TO_STONE.getNumber(), -1.0, -1.0, -1.0, -1.0);
-
-        greenWheelLeftIntake.setPower(0);
-        greenWheelRightIntake.setPower(0);
-
-        gyroTurn(0.5, NumberVariable.TURN_TO_WAFFLE.getNumber());
-
-        encoderDrive( distance,  distance,  distance,  distance, - 1.0, - 1.0, - 1.0, - 1.0);
-
-        encoderDrive(NumberVariable.SLIDE_DISTANCE_TO_WAFFLE.getNumber(), -NumberVariable.SLIDE_DISTANCE_TO_WAFFLE.getNumber(), -NumberVariable.SLIDE_DISTANCE_TO_WAFFLE.getNumber(), NumberVariable.SLIDE_DISTANCE_TO_WAFFLE.getNumber(), 0.7,-0.7,-0.7,0.7 );
-
+//        if (x < 12) {
+//
+//            distance = -NumberVariable.FIRST_DISTANCE_TO_WAFFLE.getNumber();
+//
+//        } else if (x >= 12 && x < 50) {
+//
+//            distance = -NumberVariable.SECOND_DISTANCE_TO_WAFFLE.getNumber();
+//
+//        } else if (x >= 50) {
+//
+//            distance = -NumberVariable.THIRD_DISTANCE_TO_WAFFLE.getNumber();
+//
+//        } else {
+//
+//            distance = -NumberVariable.THIRD_DISTANCE_TO_WAFFLE.getNumber();
+//
+//        }
+//
+////        encoderDrive( NumberVariable.SLIDE_CORRECTION.getNumber(), - NumberVariable.SLIDE_CORRECTION.getNumber(), - NumberVariable.SLIDE_CORRECTION.getNumber(),  NumberVariable.SLIDE_CORRECTION.getNumber(),  0.5, - 0.5, - 0.5,  0.5);
+//
+//        gyroTurn(0.5, NumberVariable.FIRST_TURN.getNumber());
+//
+//        greenWheelLeftIntake.setPower(1.0);
+//        greenWheelRightIntake.setPower(-1.0);
+//
+//        encoderDrive(NumberVariable.DRIVE_TO_STONE.getNumber(), NumberVariable.DRIVE_TO_STONE.getNumber(), NumberVariable.DRIVE_TO_STONE.getNumber(), NumberVariable.DRIVE_TO_STONE.getNumber(), 0.5, 0.5, 0.5, 0.5);
+//
+//        clawServo.setPosition(0.5);
+//        elevatorTilt.setPower(-1.0);
+//        Thread.sleep(200);
+//        elevatorTilt.setPower(0);
+//
+//
+//        encoderDrive(-NumberVariable.DRIVE_TO_STONE.getNumber(), -NumberVariable.DRIVE_TO_STONE.getNumber(), -NumberVariable.DRIVE_TO_STONE.getNumber(), -NumberVariable.DRIVE_TO_STONE.getNumber(), -1.0, -1.0, -1.0, -1.0);
+//
+//        greenWheelLeftIntake.setPower(0);
+//        greenWheelRightIntake.setPower(0);
+//
+//        gyroTurn(0.5, NumberVariable.TURN_TO_WAFFLE.getNumber());
+//
+//        encoderDrive( distance,  distance,  distance,  distance, - 1.0, - 1.0, - 1.0, - 1.0);
+//
+//        encoderDrive(NumberVariable.SLIDE_DISTANCE_TO_WAFFLE.getNumber(), -NumberVariable.SLIDE_DISTANCE_TO_WAFFLE.getNumber(), -NumberVariable.SLIDE_DISTANCE_TO_WAFFLE.getNumber(), NumberVariable.SLIDE_DISTANCE_TO_WAFFLE.getNumber(), 0.7,-0.7,-0.7,0.7 );
+//
 
         Thread.sleep(1000);
 
@@ -285,13 +285,13 @@ public class BlueAutoWaffleOnly extends LinearOpMode {
         frontRightDrive.setPower(0);
         backRightDrive.setPower(0);
 
-        gyroTurn(1.0, NumberVariable.TURN_WAFFLE.getNumber());
-
-        gyroTurn(1.0,NumberVariable.TURN_STONE_PLACEMENT.getNumber());
-
-
-
-
+//        gyroTurn(1.0, NumberVariable.TURN_WAFFLE.getNumber());
+//
+//        gyroTurn(1.0,NumberVariable.TURN_STONE_PLACEMENT.getNumber());
+//
+//
+//
+//
 
     }
 

@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.teamcode.TeleOpCode;
+package org.firstinspires.ftc.teamcode.TeleOpCode;
 
 import android.app.*;
 import android.graphics.*;

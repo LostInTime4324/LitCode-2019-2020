@@ -180,95 +180,95 @@ public class DaProAuto extends LinearOpMode {
 
         //Waits for you to push the triangle play button, everything before this happens after init is pushed
         waitForStart();
-
-        encoderDrive(NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(),1.0, 1.0, 1.0, 1.0);
-
-        gyroTurn(0.7,90);
-
-        daHooker.setPosition(NumberVariable.DAHOOKER_END_POSITION.getNumber());
-
-        nonProportionalEncoderDrive(3,-3,-3,3,1.0,-1.0,-1.0,1.0);
-
-        clawServo2.setPosition(NumberVariable.CLAW_START.getNumber());
-
-        while (hsvValues[0] < 99) {
-
-            frontLeftDrive.setPower(NumberVariable.SLIDE_SPEED.getNumber());
-            backLeftDrive.setPower(NumberVariable.SLIDE_SPEED.getNumber());
-            frontRightDrive.setPower(NumberVariable.SLIDE_SPEED.getNumber());
-            backRightDrive.setPower(NumberVariable.SLIDE_SPEED.getNumber());
-
-            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR), (int) (sensorColor.green() * SCALE_FACTOR), (int) (sensorColor.blue() * SCALE_FACTOR), hsvValues);
-
-            telemetry.addData("Stone", "Not detected");
-
-            x++;
-
-            telemetry.addData("x-value", x);
-
-            telemetry.addData("hsv", hsvValues[0]);
-
-            telemetry.update();
-        }
-
-        if (x < 12) {
-
-            distance = NumberVariable.FIRST_DISTANCE_TO_WAFFLE.getNumber();
-
-        }
-        else if (x >= 12 && x < 50) {
-
-            distance = NumberVariable.SECOND_DISTANCE_TO_WAFFLE.getNumber();
-
-        }
-        else if (x >= 50) {
-
-            distance = NumberVariable.THIRD_DISTANCE_TO_WAFFLE.getNumber();
-
-        }
-        else {
-
-            distance = NumberVariable.THIRD_DISTANCE_TO_WAFFLE.getNumber();
-
-        }
-
-        frontLeftDrive.setPower(0);
-        backLeftDrive.setPower(0);
-        frontRightDrive.setPower(0);
-        backRightDrive.setPower(0);
-
-        encoderDrive(3,3,3,3,1.0,1.0,1.0,1.0);
-
-        daHooker.setPosition(NumberVariable.DAHOOKER_START_POSITION.getNumber());
-
-        Thread.sleep(500);
-
-        clawServo2.setPosition(NumberVariable.CLAW_END.getNumber());
-
-        Thread.sleep(500);
-
-
-        nonProportionalEncoderDrive(-6,6,6,-6,-1.0,1.0,1.0,-1.0);
-
-        encoderDrive(-distance,-distance,-distance,-distance,-1.0,-1.0,-1.0,-1.0);
-
-        nonProportionalEncoderDrive(6,-6,-6,6,1.0,-1.0,-1.0,1.0);
-
-
-        daHooker.setPosition(NumberVariable.DAHOOKER_END_POSITION.getNumber());
-
-        Thread.sleep(500);
-
-        clawServo2.setPosition(NumberVariable.CLAW_START.getNumber());
-
-        Thread.sleep(500);
-
-        nonProportionalEncoderDrive(-6,6,6,-6,-1.0,1.0,1.0,-1.0);
-
-        encoderDrive(distance/2,distance/2,distance/2,distance/2,1.0,1.0,1.0,1.0);
-
-
-
+//
+//        encoderDrive(NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(), NumberVariable.FIRST_DRIVE.getNumber(),1.0, 1.0, 1.0, 1.0);
+//
+//        gyroTurn(0.7,90);
+//
+//        daHooker.setPosition(NumberVariable.DAHOOKER_END_POSITION.getNumber());
+//
+//        nonProportionalEncoderDrive(3,-3,-3,3,1.0,-1.0,-1.0,1.0);
+//
+//        clawServo2.setPosition(NumberVariable.CLAW_START.getNumber());
+//
+//        while (hsvValues[0] < 99) {
+//
+//            frontLeftDrive.setPower(NumberVariable.SLIDE_SPEED.getNumber());
+//            backLeftDrive.setPower(NumberVariable.SLIDE_SPEED.getNumber());
+//            frontRightDrive.setPower(NumberVariable.SLIDE_SPEED.getNumber());
+//            backRightDrive.setPower(NumberVariable.SLIDE_SPEED.getNumber());
+//
+//            Color.RGBToHSV((int) (sensorColor.red() * SCALE_FACTOR), (int) (sensorColor.green() * SCALE_FACTOR), (int) (sensorColor.blue() * SCALE_FACTOR), hsvValues);
+//
+//            telemetry.addData("Stone", "Not detected");
+//
+//            x++;
+//
+//            telemetry.addData("x-value", x);
+//
+//            telemetry.addData("hsv", hsvValues[0]);
+//
+//            telemetry.update();
+//        }
+//
+//        if (x < 12) {
+//
+//            distance = NumberVariable.FIRST_DISTANCE_TO_WAFFLE.getNumber();
+//
+//        }
+//        else if (x >= 12 && x < 50) {
+//
+//            distance = NumberVariable.SECOND_DISTANCE_TO_WAFFLE.getNumber();
+//
+//        }
+//        else if (x >= 50) {
+//
+//            distance = NumberVariable.THIRD_DISTANCE_TO_WAFFLE.getNumber();
+//
+//        }
+//        else {
+//
+//            distance = NumberVariable.THIRD_DISTANCE_TO_WAFFLE.getNumber();
+//
+//        }
+//
+//        frontLeftDrive.setPower(0);
+//        backLeftDrive.setPower(0);
+//        frontRightDrive.setPower(0);
+//        backRightDrive.setPower(0);
+//
+//        encoderDrive(3,3,3,3,1.0,1.0,1.0,1.0);
+//
+//        daHooker.setPosition(NumberVariable.DAHOOKER_START_POSITION.getNumber());
+//
+//        Thread.sleep(500);
+//
+//        clawServo2.setPosition(NumberVariable.CLAW_END.getNumber());
+//
+//        Thread.sleep(500);
+//
+//
+//        nonProportionalEncoderDrive(-6,6,6,-6,-1.0,1.0,1.0,-1.0);
+//
+//        encoderDrive(-distance,-distance,-distance,-distance,-1.0,-1.0,-1.0,-1.0);
+//
+//        nonProportionalEncoderDrive(6,-6,-6,6,1.0,-1.0,-1.0,1.0);
+//
+//
+//        daHooker.setPosition(NumberVariable.DAHOOKER_END_POSITION.getNumber());
+//
+//        Thread.sleep(500);
+//
+//        clawServo2.setPosition(NumberVariable.CLAW_START.getNumber());
+//
+//        Thread.sleep(500);
+//
+//        nonProportionalEncoderDrive(-6,6,6,-6,-1.0,1.0,1.0,-1.0);
+//
+//        encoderDrive(distance/2,distance/2,distance/2,distance/2,1.0,1.0,1.0,1.0);
+//
+//
+//
 
 
     }

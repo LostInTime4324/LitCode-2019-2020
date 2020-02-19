@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode.MasterAuto;
 
+import com.acmerobotics.roadrunner.geometry.*;
+import com.acmerobotics.roadrunner.path.heading.*;
+import com.acmerobotics.roadrunner.trajectory.*;
 import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.qualcomm.robotcore.hardware.*;
 
@@ -10,7 +13,7 @@ import org.openftc.easyopencv.*;
 
 //This adds this runnable Autonomous OpMode to the Driver Station
 //Add @Disabled under this comment to remove it from the Driver Station
-@Autonomous(name="MasterBlueAuto", group="GodBot")
+@Autonomous(name="MasterAutoRed", group="GodBot")
 
 //Declares our class that extends LinearOpMode, a built-in class that runs the auto
 public class MasterAutoRed extends LinearOpMode {
@@ -80,7 +83,31 @@ public class MasterAutoRed extends LinearOpMode {
         phoneCam.setPipeline(detector);
 
         //Configures the image on the robot controller
-        phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+        phoneCam.startStreaming(320, 240, OpenCvCameraRotation.SIDEWAYS_LEFT);
+
+        Trajectory firstLeft = drive.trajectoryBuilder()
+                .lineTo(new Vector2d(13  , -70), new LinearInterpolator(0, Math.toRadians(-40)))
+                .lineTo(new Vector2d(35,-60))
+                .build();
+
+        Trajectory firstCenter = drive.trajectoryBuilder()
+                .lineTo(new Vector2d(5,-65), new LinearInterpolator(0,Math.toRadians(-40)))
+                .lineTo(new Vector2d(25,-60))
+                .build();
+
+        Trajectory firstRight = drive.trajectoryBuilder()
+                .lineTo(new Vector2d(-7, -60), new LinearInterpolator(0, Math.toRadians(-40)))
+                .lineTo(new Vector2d(15,-60))
+                .build();
+
+        Trajectory toLine = drive.trajectoryBuilder()
+                .splineTo(new Pose2d(-40,-45), new LinearInterpolator(Math.toRadians(-40),0))
+                .build();
+
+        Trajectory toWaffle = drive.trajectoryBuilder()
+                .lineTo(new Vector2d(), new LinearInterpolator(0,0))
+                .build();
+
 
         //Pauses the OpMode while detecting the skystone's position
         while (!isStarted()) {
@@ -89,7 +116,147 @@ public class MasterAutoRed extends LinearOpMode {
             telemetry.update();
         }
 
+
         waitForStart();
+
+        if (isStopRequested()) return;
+
+        if(waffleSide){
+
+            if(doWaffle){
+
+
+            }
+            else if(parkOrNot){
+            }
+
+        }
+
+        else if(skystoneSide){
+
+            if(NumberVariable.NUM_OF_SKY_STONES.getNumber() > 0){
+
+                if(position == "LEFT"){
+
+                    greenWheelLeftIntake.setPower(1.0);
+                    greenWheelRightIntake.setPower((-1.0));
+                    drive.followTrajectorySync(firstLeft);
+
+                }
+
+                else if(position == "CENTER"){
+
+                    greenWheelLeftIntake.setPower(1.0);
+                    greenWheelRightIntake.setPower(-1.0);
+                    drive.followTrajectorySync(firstCenter);
+
+
+                }
+
+                else if(position == "RIGHT"){
+
+                    greenWheelLeftIntake.setPower(1.0);
+                    greenWheelRightIntake.setPower((-1.0));
+                    drive.followTrajectorySync(firstRight);
+
+
+
+                }
+
+                else {
+
+                    greenWheelLeftIntake.setPower(1.0);
+                    greenWheelRightIntake.setPower(-1.0);
+                    drive.followTrajectorySync(firstCenter);
+
+                }
+
+                drive.followTrajectorySync(toLine);
+
+                if(NumberVariable.NUM_OF_SKY_STONES_ON_WAFFLE.getNumber() > 0){
+
+
+
+                }
+
+            }
+
+            if(doWaffle){}
+
+            if(NumberVariable.NUM_OF_SKY_STONES.getNumber() > 1){
+
+                if(position == "LEFT"){}
+
+                else if(position == "CENTER"){}
+
+                else if(position == "RIGHT"){}
+
+                else {}
+
+
+                if(NumberVariable.NUM_OF_SKY_STONES_ON_WAFFLE.getNumber() > 1){
+
+
+
+                }
+
+            }
+
+            if(NumberVariable.NUM_OF_STONES.getNumber() > 0){
+
+                if(position == "LEFT"){}
+
+                else if(position == "CENTER"){}
+
+                else if(position == "RIGHT"){}
+
+                else {}
+
+
+
+                if(NumberVariable.NUM_OF_STONES.getNumber() > 0){
+
+
+
+                }
+
+            }
+
+            if(NumberVariable.NUM_OF_STONES.getNumber() > 1){
+
+                if(position == "LEFT"){}
+
+                else if(position == "CENTER"){}
+
+                else if(position == "RIGHT"){}
+
+                else {}
+
+
+                if(NumberVariable.NUM_OF_STONES.getNumber() > 1){
+
+
+
+                }
+
+            }
+
+            if(parkOrNot){}
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

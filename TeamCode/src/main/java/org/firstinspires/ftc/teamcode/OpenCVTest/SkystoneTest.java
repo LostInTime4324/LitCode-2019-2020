@@ -17,7 +17,7 @@ public class SkystoneTest extends LinearOpMode {
         phoneCam = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
         phoneCam.openCameraDevice();
         phoneCam.setPipeline(detector);
-        phoneCam.startStreaming(320, 240, OpenCvCameraRotation.UPRIGHT);
+        phoneCam.startStreaming(320, 240, OpenCvCameraRotation.SIDEWAYS_RIGHT);
 
         while (!isStarted()) {
             position = detector.position;

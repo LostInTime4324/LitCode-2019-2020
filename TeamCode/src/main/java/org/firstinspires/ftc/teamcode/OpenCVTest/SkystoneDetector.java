@@ -28,6 +28,14 @@ public class SkystoneDetector extends OpenCvPipeline {
         Imgproc.rectangle(workingMatrix, new Rect(10, 120, 40, 30), new Scalar(0,255,0));
         Imgproc.rectangle(workingMatrix, new Rect(80, 120, 40, 30), new Scalar(0,255,0));
         Imgproc.rectangle(workingMatrix, new Rect(150, 120, 40, 30), new Scalar(0,255,0));
+//
+//        Mat matLeft = workingMatrix.submat(120, 150, 10, 50);
+//        Mat matCenter = workingMatrix.submat(120, 150, 80, 120);
+//        Mat matRight = workingMatrix.submat(120, 150, 150, 190);
+//
+//        Imgproc.rectangle(workingMatrix, new Rect(120, 10, 40, 30), new Scalar(0,255,0));
+//        Imgproc.rectangle(workingMatrix, new Rect(120, 80, 40, 30), new Scalar(0,255,0));
+//        Imgproc.rectangle(workingMatrix, new Rect(120, 150, 40, 30), new Scalar(0,255,0));
 
         double leftTotal = Core.sumElems(matLeft).val[2];
         double centerTotal = Core.sumElems(matCenter).val[2];

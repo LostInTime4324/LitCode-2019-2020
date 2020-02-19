@@ -1,10 +1,8 @@
-package org.firstinspires.ftc.teamcode.teamcode.TeleOpCode;
+package org.firstinspires.ftc.teamcode.TeleOpCode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.qualcomm.robotcore.hardware.*;
-
-import org.firstinspires.ftc.robotcontroller.teamcode.*;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.*;
 
@@ -64,10 +62,10 @@ public class MechanumOpMode extends OpMode {
         elevatorTilt.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         //Optimizes direction of motors based on the side of the robot that they are on
-        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
-        backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
-        frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
-        backRightDrive.setDirection(DcMotor.Direction.FORWARD);
+        frontLeftDrive.setDirection(DcMotor.Direction.FORWARD);
+        backLeftDrive.setDirection(DcMotor.Direction.FORWARD);
+        frontRightDrive.setDirection(DcMotor.Direction.REVERSE);
+        backRightDrive.setDirection(DcMotor.Direction.REVERSE);
 
 
         frontLeftDrive.setMode(STOP_AND_RESET_ENCODER);

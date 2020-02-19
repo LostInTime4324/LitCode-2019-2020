@@ -13,7 +13,7 @@ public class DanyLearny extends OpMode {
     @Override
     public void init() {
 
-        Turny = hardwareMap.get(DcMotor.class,"OwO");
+        Turny = hardwareMap.get(DcMotor.class,"Dany Cant Code");
 
 
 

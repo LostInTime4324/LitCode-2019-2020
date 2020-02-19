@@ -21,7 +21,8 @@ public class RoadrunnerTest extends LinearOpMode {
         SampleMecanumDriveBase drive = new SampleMecanumDriveREVOptimized(hardwareMap);
 
         Trajectory trajectory = drive.trajectoryBuilder()
-                .lineTo(new Vector2d(10, -60), new LinearInterpolator(0, Math.toRadians(-20)))
+//                .lineTo(new Vector2d(10, -60), new LinearInterpolator(0, Math.toRadians(-20)))
+                .strafeLeft(30)
 //                .splineTo(new Pose2d(30,-140),new LinearInterpolator(0,Math.toRadians(180)))
 //                .splineTo(new Pose2d(0,0),new LinearInterpolator(Math.toRadians(180), 0))
 

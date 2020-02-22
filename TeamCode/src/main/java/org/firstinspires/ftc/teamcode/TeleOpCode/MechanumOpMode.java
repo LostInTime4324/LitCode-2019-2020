@@ -13,21 +13,25 @@ public class MechanumOpMode extends OpMode {
 
 
 
-    //Tells the robot the names of the motors
-    public static DcMotor frontLeftDrive;
-    public static DcMotor frontRightDrive;
-    public static DcMotor backLeftDrive;
-    public static DcMotor backRightDrive;
-//    public static DcMotor elevatorMotor;
+    //Creates empty drive objects
+    public static DcMotorEx frontLeftDrive;
+    public static DcMotorEx frontRightDrive;
+    public static DcMotorEx backLeftDrive;
+    public static DcMotorEx backRightDrive;
+
+    //Creates empty elevator objects
+    public static DcMotor elevatorMotor;
     public static DcMotor elevatorTilt;
+
+    //Creates empty intake objects
     public static DcMotor greenWheelLeftIntake;
     public static DcMotor greenWheelRightIntake;
-    public static Servo rightDropper;
-    public static Servo leftDropper;
-    public static Servo daHooker;
+
+    //Creates empty Servo objects
+    public static Servo rightHooker;
+    public static Servo leftHooker;
     public static Servo clawServo;
-    public static Servo clawServo2;
-//    public static Servo clawTwist;
+
 
 
 
@@ -36,28 +40,29 @@ public class MechanumOpMode extends OpMode {
     @Override
     public void init() {
 
+
         //Tells the phone that the robot is initialized
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        daHooker = hardwareMap.get(Servo.class, "daHooker");
+        rightHooker = hardwareMap.get(Servo.class, "rightDropper");
+        leftHooker = hardwareMap.get(Servo.class, "leftDropper");
 
-        rightDropper = hardwareMap.get(Servo.class, "rightDropper");
-        leftDropper = hardwareMap.get(Servo.class, "leftDropper");
-
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "frontLeftDrive");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "frontRightDrive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
+        frontLeftDrive = (DcMotorEx)hardwareMap.get(DcMotor.class, "frontLeftDrive");
+        backLeftDrive = (DcMotorEx)hardwareMap.get(DcMotor.class, "backLeftDrive");
+        frontRightDrive = (DcMotorEx)hardwareMap.get(DcMotor.class, "frontRightDrive");
+        backRightDrive = (DcMotorEx)hardwareMap.get(DcMotor.class, "backRightDrive");
 
         elevatorTilt = hardwareMap.get(DcMotor.class, "elevatorTilter");
-//        elevatorMotor = hardwareMap.get(DcMotor.class, "elevator");
+        elevatorMotor = hardwareMap.get(DcMotor.class, "elevator");
 
         greenWheelRightIntake = hardwareMap.get(DcMotor.class,"rightIntake");
         greenWheelLeftIntake = hardwareMap.get(DcMotor.class,"leftIntake");
 //        clawTwist = hardwareMap.get(Servo.class,"clawTwist");
+
+//
         clawServo = hardwareMap.get(Servo.class,"clawServo");
-        clawServo2 = hardwareMap.get(Servo.class,"clawServo2");
+//        clawServo2 = hardwareMap.get(Servo.class,"clawServo2");
 
         elevatorTilt.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -79,7 +84,20 @@ public class MechanumOpMode extends OpMode {
         frontRightDrive.setMode(RUN_USING_ENCODER);
         backRightDrive.setMode(RUN_USING_ENCODER);
 
-        elevatorTilt.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontLeftDrive.setVelocityPIDFCoefficients(1.169, .1169, 0, 11.69);
+
+        frontRightDrive.setVelocityPIDFCoefficients(1.129, .1129, 0, 11.29);
+
+        backLeftDrive.setVelocityPIDFCoefficients(1.137, .1137, 0, 11.37);
+
+        backLeftDrive.setVelocityPIDFCoefficients(1.122, .1122, 0, 11.22);
+
+        frontLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        elevatorMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
 
 
@@ -115,115 +133,89 @@ public class MechanumOpMode extends OpMode {
 
         telemetry.update();
 
-        if(!gamepad1.right_bumper){
-            drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
-        }
-        else if (gamepad1.right_bumper){
 
-            frontRightDrive.setPower(gamepad1.left_stick_x);
-            backRightDrive.setPower(-gamepad1.left_stick_x);
-            frontLeftDrive.setPower(-gamepad1.left_stick_x);
-            backLeftDrive.setPower(gamepad1.left_stick_x);
+        drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
-        }
-        else if(gamepad1.left_bumper){
+        //Slowed D-pad speed
+        if(gamepad1.dpad_up){
 
-            drive(gamepad1.left_stick_y * 0.5, gamepad1.left_stick_x * 0.5, gamepad1.right_stick_x * 0.5);
+            leftDrive(0.4);
+            rightDrive(0.4);
 
         }
-        else if(gamepad1.left_bumper && gamepad1.right_bumper){
+        else if (gamepad1.dpad_down){
 
-            frontRightDrive.setPower(gamepad1.left_stick_x * 0.5);
-            backRightDrive.setPower(-gamepad1.left_stick_x * 0.5);
-            frontLeftDrive.setPower(-gamepad1.left_stick_x * 0.5);
-            backLeftDrive.setPower(gamepad1.left_stick_x * 0.5);
+            leftDrive(-0.4);
+            rightDrive(-0.4);
 
         }
+        else if (gamepad1.dpad_left){
 
-//        boolean tank = false;
-//
-//        if(gamepad1.start){
-//            tank = true;
-//        }
-//
-//        if(tank == true){
-//            if(gamepad1.a){
-//                frontLeftDrive.setPower(-gamepad1.left_stick_x);
-//                backLeftDrive.setPower(gamepad1.left_stick_x);
-//                frontRightDrive.setPower(gamepad1.left_stick_x);
-//                backRightDrive.setPower(-gamepad1.left_stick_x);
-//
-//            }
-//
-//            else{
-//
-//                backLeftDrive.setPower(gamepad1.left_stick_y);
-//                frontLeftDrive.setPower(gamepad1.left_stick_y);
-//                backRightDrive.setPower(gamepad1.right_stick_y);
-//                frontRightDrive.setPower(gamepad1.right_stick_y);
-//
-//
-//            }
-//
-//        }
+            lateralDrive(0.4);
 
-//
-//
+        }
+        else if(gamepad1.dpad_right){
 
-
-//        //test code for one joystick 100% movement
-
-
-
-//        frontRightDrive.setPower(-gamepad1.right_stick_x);
-//        frontLeftDrive.setPower(gamepad1.right_stick_x);
-//        backRightDrive.setPower(-gamepad1.right_stick_x);
-//        backLeftDrive.setPower(gamepad1.right_stick_x);
-//
-
-        //turning right stick
-
-
-
-
-
-
-//        frontRightDrive.setPower(1.0);
-//        backRightDrive.setPower(1.0);
-//        frontLeftDrive.setPower(1.0);
-//        backLeftDrive.setPower(1.0);
-
-
-        elevatorTilt.setPower(gamepad2.left_stick_y);
-
-
-
-
-        if(gamepad2.right_stick_button){
-
-            rightDropper.setPosition(0.75);
+            lateralDrive(-0.4);
 
         }
         else{
 
-            rightDropper.setPosition(0.25);
+            frontRightDrive.setPower(0.0);
+            backRightDrive.setPower(0.0);
+            frontLeftDrive.setPower(0.0);
+            backLeftDrive.setPower(0.0);
+
+        }
+
+
+        //Runs elevator at slow and fast speeds
+        if(gamepad2.left_bumper){
+
+            elevatorTilt.setPower((gamepad2.left_stick_y * 0.5));
+
+        }
+        else{
+
+            elevatorTilt.setPower(gamepad2.left_stick_y);
+
+
+        }
+
+        if(gamepad2.right_bumper){
+
+            elevatorMotor.setPower((gamepad2.right_stick_y * 0.5));
+
+        }
+        else{
+
+            elevatorMotor.setPower(gamepad2.right_stick_y);
+
+        }
+
+
+        //Drops the foundation Hookers
+        if(gamepad2.right_stick_button){
+
+            rightHooker.setPosition(0.75);
+
+        }
+        else{
+
+            rightHooker.setPosition(0.25);
         }
 
         if(gamepad2.left_stick_button){
 
-            leftDropper.setPosition(0.3);
+            leftHooker.setPosition(0.3);
         }
         else{
 
-            leftDropper.setPosition(0.90);
+            leftHooker.setPosition(0.90);
         }
 
 
-
-
-
-
-
+        //Runs the claw Servo
         if(gamepad2.x){
             clawServo.setPosition(0.5);
 
@@ -233,48 +225,32 @@ public class MechanumOpMode extends OpMode {
         }
 
 
+        //Toggle example
+//
 
 
 
-//        if(gamepad2.y){
-//            elevatorMotor.setPower(1.0);
-//        }
-//        else if(gamepad2.b && gamepad2.y) {
-//            elevatorMotor.setPower(-0.2);
-//        }
-//
-//
-//
-//
-//
-//
-//        if(gamepad2.left_stick_y > 0.1){
-//            clawTwist.setPosition(gamepad2.left_stick_y);
-//        }
-//        else{
-//            clawTwist.setPosition(0.5);
-//        }
 
         //Get snagged by dat hooker
 
 
 
 //        Paagal Toggle
-        if(gamepad2.b && !changed) {
-
-            daHooker.setPosition(on ? 1 : 0);
-
-            on = !on;
-
-            changed = true;
-
-        }
-
-        else if (!gamepad2.b) {
-
-            changed = false;
-
-        }
+//        if(gamepad2.b && !changed) {
+//
+//            daHooker.setPosition(on ? 1 : 0);
+//
+//            on = !on;
+//
+//            changed = true;
+//
+//        }
+//
+//        else if (!gamepad2.b) {
+//
+//            changed = false;
+//
+//        }
 
 
 
@@ -291,21 +267,21 @@ public class MechanumOpMode extends OpMode {
 //
 //        }
 
-        if(gamepad2.a){
-
-            clawServo2.setPosition(0.65);
-
-        }
-        else if (!gamepad2.a){
-
-            clawServo2.setPosition(0.5);
-
-        }
-
-
+//        if(gamepad2.a){
+//
+//            clawServo2.setPosition(0.65);
+//
+//        }
+//        else if (!gamepad2.a){
+//
+//            clawServo2.setPosition(0.5);
+//
+//        }
 
 
-        if(gamepad2.right_bumper){
+
+        //GIves the driver intake controls
+        if(gamepad1.right_bumper){
 
             greenWheelLeftIntake.setPower(1.0);
 
@@ -313,7 +289,7 @@ public class MechanumOpMode extends OpMode {
 
         }
 
-        else if(gamepad2.left_bumper){
+        else if(gamepad1.left_bumper){
 
             greenWheelLeftIntake.setPower(-1.0);
 
@@ -330,6 +306,7 @@ public class MechanumOpMode extends OpMode {
         }
 
 
+        //Can be used to bulk read data and debug non-working parts
 //        telemetry.addData("Hooker Position", daHooker.getPosition());
 
 //        telemetry.addData("daHooker", gamepad1.y);
@@ -343,15 +320,10 @@ public class MechanumOpMode extends OpMode {
 //
 //        telemetry.addData("backRightPower", gamepad1.right_stick_y);
 //        telemetry.addData("frontRightPower", gamepad1.right_stick_y);
-
-
-
-
-
-
-
-
     }
+
+
+
 
     public void rightDrive (double rightPower){
 

@@ -43,6 +43,7 @@ public class SkystoneDetector extends OpenCvPipeline {
 
         if (leftTotal > centerTotal) {
             if (leftTotal > rightTotal) {
+                //hsgfaj
                 // left is skystone
                 position = "LEFT";
             } else {

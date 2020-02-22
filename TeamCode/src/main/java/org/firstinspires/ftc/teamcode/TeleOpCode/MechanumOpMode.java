@@ -30,7 +30,8 @@ public class MechanumOpMode extends OpMode {
     //Creates empty Servo objects
     public static Servo rightHooker;
     public static Servo leftHooker;
-    public static Servo clawServo;
+    public static Servo clawServo;//h
+
 
 
 

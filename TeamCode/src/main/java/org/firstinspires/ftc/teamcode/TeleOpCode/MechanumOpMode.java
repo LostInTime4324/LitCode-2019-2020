@@ -30,7 +30,7 @@ public class MechanumOpMode extends OpMode {
     //Creates empty Servo objects
     public static Servo rightHooker;
     public static Servo leftHooker;
-    public static Servo clawServo;//h
+    public static Servo clawServo;
 
 
 
@@ -160,14 +160,7 @@ public class MechanumOpMode extends OpMode {
             lateralDrive(-0.4);
 
         }
-        else{
 
-            frontRightDrive.setPower(0.0);
-            backRightDrive.setPower(0.0);
-            frontLeftDrive.setPower(0.0);
-            backLeftDrive.setPower(0.0);
-
-        }
 
 
         //Runs elevator at slow and fast speeds

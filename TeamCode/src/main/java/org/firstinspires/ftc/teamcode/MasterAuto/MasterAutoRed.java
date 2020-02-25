@@ -1,14 +1,18 @@
 package org.firstinspires.ftc.teamcode.MasterAuto;
 
+import com.acmerobotics.roadrunner.drive.*;
 import com.acmerobotics.roadrunner.geometry.*;
 import com.acmerobotics.roadrunner.path.heading.*;
 import com.acmerobotics.roadrunner.trajectory.*;
+import com.acmerobotics.roadrunner.trajectory.constraints.*;
 import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.qualcomm.robotcore.hardware.*;
 
 import org.firstinspires.ftc.robotcontroller.teamcode.*;
 import org.firstinspires.ftc.teamcode.OpenCVTest.*;
+import org.firstinspires.ftc.teamcode.RoadRunner.drive.*;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.mecanum.*;
+import org.firstinspires.ftc.teamcode.RoadRunner.drive.opmode.*;
 import org.openftc.easyopencv.*;
 
 //This adds this runnable Autonomous OpMode to the Driver Station
@@ -24,6 +28,8 @@ public class MasterAutoRed extends LinearOpMode {
     private SkystoneDetector detector = new SkystoneDetector();
     //Stores the position values
     private String position;
+
+    public double x = 60;
 
     //
     boolean waffleSide = BooleanVariable.WAFFLE_SIDE.getBoolean();
@@ -85,28 +91,30 @@ public class MasterAutoRed extends LinearOpMode {
         //Configures the image on the robot controller
         phoneCam.startStreaming(320, 240, OpenCvCameraRotation.SIDEWAYS_LEFT);
 
+        Trajectory firstStrafe = drive.trajectoryBuilder()
+                .lineTo(new Vector2d(0,30), new ConstantInterpolator(0))
+                .build();
+
         Trajectory firstLeft = drive.trajectoryBuilder()
-                .lineTo(new Vector2d(13  , -70), new LinearInterpolator(0, Math.toRadians(-40)))
-                .lineTo(new Vector2d(35,-60))
+                .lineTo(new Vector2d(40,0), new LinearInterpolator(0,60))
                 .build();
 
         Trajectory firstCenter = drive.trajectoryBuilder()
-                .lineTo(new Vector2d(5,-65), new LinearInterpolator(0,Math.toRadians(-40)))
-                .lineTo(new Vector2d(25,-60))
+                .lineTo(new Vector2d(30,0), new LinearInterpolator(0, 80))
                 .build();
 
         Trajectory firstRight = drive.trajectoryBuilder()
-                .lineTo(new Vector2d(-7, -60), new LinearInterpolator(0, Math.toRadians(-40)))
-                .lineTo(new Vector2d(15,-60))
+                .lineTo(new Vector2d(40,0), new LinearInterpolator(0,100))
                 .build();
 
         Trajectory toLine = drive.trajectoryBuilder()
-                .splineTo(new Pose2d(-40,-45), new LinearInterpolator(Math.toRadians(-40),0))
+                .lineTo(new Vector2d(30,60), new LinearInterpolator(drive.getExternalHeading(), 0))
                 .build();
 
         Trajectory toWaffle = drive.trajectoryBuilder()
                 .lineTo(new Vector2d(), new LinearInterpolator(0,0))
                 .build();
+
 
 
         //Pauses the OpMode while detecting the skystone's position
@@ -136,28 +144,47 @@ public class MasterAutoRed extends LinearOpMode {
 
             if(NumberVariable.NUM_OF_SKY_STONES.getNumber() > 0){
 
+
+
                 if(position == "LEFT"){
 
-                    greenWheelLeftIntake.setPower(1.0);
-                    greenWheelRightIntake.setPower((-1.0));
+                    greenWheelLeftIntake.setPower(-1.0);
+                    greenWheelRightIntake.setPower(1.0);
+                    drive.followTrajectorySync(firstStrafe);
+                    drive.turnSync(Math.toRadians(60));
+                    drive.setExternalHeading(0);
                     drive.followTrajectorySync(firstLeft);
+                    drive.turnSync(Math.toRadians(30));
+
+                    x=60;
+
 
                 }
 
                 else if(position == "CENTER"){
 
-                    greenWheelLeftIntake.setPower(1.0);
-                    greenWheelRightIntake.setPower(-1.0);
+                    drive.followTrajectorySync(firstStrafe);
+                    greenWheelLeftIntake.setPower(-1.0);
+                    greenWheelRightIntake.setPower(1.0);
+                    drive.turnSync(Math.toRadians(90));
+                    drive.setExternalHeading(0);
                     drive.followTrajectorySync(firstCenter);
+                    x=70;
 
 
                 }
 
                 else if(position == "RIGHT"){
 
-                    greenWheelLeftIntake.setPower(1.0);
-                    greenWheelRightIntake.setPower((-1.0));
+                    drive.followTrajectorySync(firstStrafe);
+                    greenWheelLeftIntake.setPower(-1.0);
+                    greenWheelRightIntake.setPower(1.0);
+                    drive.turnSync(Math.toRadians(120));
+                    drive.setExternalHeading(0);
                     drive.followTrajectorySync(firstRight);
+                    drive.turnSync(Math.toRadians(-30));
+
+                    x=80;
 
 
 
@@ -165,13 +192,30 @@ public class MasterAutoRed extends LinearOpMode {
 
                 else {
 
-                    greenWheelLeftIntake.setPower(1.0);
-                    greenWheelRightIntake.setPower(-1.0);
+                    drive.followTrajectorySync(firstStrafe);
+                    greenWheelLeftIntake.setPower(-1.0);
+                    greenWheelRightIntake.setPower(1.0);
+                    drive.turnSync(Math.toRadians(90));
+                    drive.setExternalHeading(0);
                     drive.followTrajectorySync(firstCenter);
+                    x=70;
 
                 }
 
+
+                drive.setExternalHeading(0);
+
+                drive.turnSync(Math.toRadians(-90));
+
                 drive.followTrajectorySync(toLine);
+
+                greenWheelLeftIntake.setPower(1.0);
+                greenWheelRightIntake.setPower(-1.0);
+
+
+
+
+
 
                 if(NumberVariable.NUM_OF_SKY_STONES_ON_WAFFLE.getNumber() > 0){
 

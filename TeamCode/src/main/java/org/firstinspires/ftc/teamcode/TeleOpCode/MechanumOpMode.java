@@ -38,6 +38,7 @@ public class MechanumOpMode extends OpMode {
 
 
 
+
     @Override
     public void init() {
 
@@ -85,20 +86,26 @@ public class MechanumOpMode extends OpMode {
         frontRightDrive.setMode(RUN_USING_ENCODER);
         backRightDrive.setMode(RUN_USING_ENCODER);
 
-        frontLeftDrive.setVelocityPIDFCoefficients(1.169, .1169, 0, 11.69);
+        frontLeftDrive.setVelocityPIDFCoefficients(1.30027, .130027, 0.01, 13.0027);
 
-        frontRightDrive.setVelocityPIDFCoefficients(1.129, .1129, 0, 11.29);
+        frontRightDrive.setVelocityPIDFCoefficients(1.33199, .133199, 0.01, 13.3199);
 
-        backLeftDrive.setVelocityPIDFCoefficients(1.137, .1137, 0, 11.37);
+        backRightDrive.setVelocityPIDFCoefficients(1.31068, .131068, 0.01, 13.1068);
 
-        backLeftDrive.setVelocityPIDFCoefficients(1.122, .1122, 0, 11.22);
+        backLeftDrive.setVelocityPIDFCoefficients(1.31068, .131068, 0.01, 13.1068);
+
+        elevatorTilt.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+
 
         frontLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
+//
         elevatorMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        elevatorTilt.setMode(RUN_USING_ENCODER);
 
 
 
@@ -129,6 +136,8 @@ public class MechanumOpMode extends OpMode {
         telemetry.addData("BackLeft",backLeftDrive.getCurrentPosition());
         telemetry.addData("FrontRight", frontRightDrive.getCurrentPosition());
         telemetry.addData("BackRight", backRightDrive.getCurrentPosition());
+        telemetry.addData("armPos", elevatorMotor.getCurrentPosition());
+
         telemetry.update();
 
 
@@ -188,6 +197,7 @@ public class MechanumOpMode extends OpMode {
         }
 
 
+
         //Drops the foundation Hookers
         if(gamepad2.right_stick_button){
 
@@ -217,6 +227,8 @@ public class MechanumOpMode extends OpMode {
         else{
             clawServo.setPosition(0.65);
         }
+
+//        elevatorTilt.setPower((gamepad2.right_stick_y));
 
 
         //Toggle example
@@ -271,6 +283,10 @@ public class MechanumOpMode extends OpMode {
 //            clawServo2.setPosition(0.5);
 //
 //        }
+
+
+        elevatorTilt.setTargetPosition(2000);
+        elevatorTilt.setPower(1.0);
 
 
 

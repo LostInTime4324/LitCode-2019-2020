@@ -3,10 +3,12 @@ package org.firstinspires.ftc.teamcode.RoadRunner.drive.mecanum;
 import android.support.annotation.*;
 
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
+import com.acmerobotics.roadrunner.localization.*;
 import com.qualcomm.hardware.bosch.*;
 import com.qualcomm.robotcore.hardware.*;
 
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.util.*;
+import org.jetbrains.annotations.*;
 import org.openftc.revextensions2.*;
 
 import java.util.*;
@@ -47,6 +49,14 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
         rightRear = (ExpansionHubMotor)hardwareMap.get(DcMotor.class, "backRightDrive");
         rightFront = (ExpansionHubMotor)hardwareMap.get(DcMotor.class, "frontRightDrive");
 
+        leftFront.setVelocityPIDFCoefficients(1.30027, .130027, 0.01, 13.0027);
+
+        rightFront.setVelocityPIDFCoefficients(1.33199, .133199, 0.01, 13.3199);
+
+        rightRear.setVelocityPIDFCoefficients(1.31068, .131068, 0.01, 13.1068);
+
+        leftRear.setVelocityPIDFCoefficients(1.31068, .131068, 0.01, 13.1068);
+
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
         for (ExpansionHubMotor motor : motors) {
@@ -68,6 +78,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
 
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
+
 
     }
 

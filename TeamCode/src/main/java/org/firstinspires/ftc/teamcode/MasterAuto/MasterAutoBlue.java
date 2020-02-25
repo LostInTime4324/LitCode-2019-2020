@@ -162,6 +162,7 @@ public class MasterAutoBlue extends LinearOpMode {
                 if (NumberVariable.NUM_OF_STONES.getNumber() > 1) {
 
 
+
                 }
 
             }

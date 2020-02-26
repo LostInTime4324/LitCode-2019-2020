@@ -4,28 +4,24 @@ package org.firstinspires.ftc.teamcode.TeleOpCode;
 import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.qualcomm.robotcore.hardware.*;
 
+
 public class DanyLearny extends OpMode {
-
-    public DcMotor Turny;
-
-
+    public DcMotor DanyKart;
 
     @Override
     public void init() {
 
-        Turny = hardwareMap.get(DcMotor.class,"Dany Cant Code");
-
-
-
+        DanyKart = hardwareMap.get(DcMotor.class,"Dany's Kart");
     }
 
     @Override
     public void loop() {
 
-
-        Turny.setPower(gamepad1.left_stick_y);
+        DanyKart.setPower(gamepad1.right_trigger * 1.0);
+        DanyKart.setPower(gamepad1.left_trigger * -1.0);
 
     }
 
 
 }
+

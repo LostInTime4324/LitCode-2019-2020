@@ -21,7 +21,9 @@ public class DanyLearny extends OpMode {
         DanyKart.setPower(gamepad1.left_trigger * -1.0);
 
     }
+    public static void main(String[] args) {
+        System.out.println("Lets see if Git will work!");
 
-
+    }
 }
 

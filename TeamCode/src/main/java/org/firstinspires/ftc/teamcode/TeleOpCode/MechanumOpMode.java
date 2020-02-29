@@ -98,14 +98,14 @@ public class MechanumOpMode extends OpMode {
 
 
 
-        frontLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        frontRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        backRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        frontLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        frontRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        backLeftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        backRightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 //
         elevatorMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        elevatorTilt.setMode(RUN_USING_ENCODER);
+//        elevatorTilt.setMode(RUN_USING_ENCODER);
 
 
 
@@ -136,7 +136,7 @@ public class MechanumOpMode extends OpMode {
         telemetry.addData("BackLeft",backLeftDrive.getCurrentPosition());
         telemetry.addData("FrontRight", frontRightDrive.getCurrentPosition());
         telemetry.addData("BackRight", backRightDrive.getCurrentPosition());
-        telemetry.addData("armPos", elevatorMotor.getCurrentPosition());
+//        telemetry.addData("armPos", elevatorMotor.getCurrentPosition());
 
         telemetry.update();
 
@@ -144,7 +144,6 @@ public class MechanumOpMode extends OpMode {
         telemetry.update();
 
 
-        drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
 
         //Slowed D-pad speed
         if(gamepad1.dpad_up){
@@ -169,32 +168,34 @@ public class MechanumOpMode extends OpMode {
             lateralDrive(-0.4);
 
         }
+        else{
+
+            drive(gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1.right_stick_x);
+
+
+        }
 
 
 
         //Runs elevator at slow and fast speeds
         if(gamepad2.left_bumper){
 
-            elevatorTilt.setPower((gamepad2.left_stick_y * 0.5));
+            elevatorTilt.setPower((-gamepad2.left_stick_y * 0.5));
+
+        }
+        else if(!gamepad2.left_bumper) {
+
+            elevatorTilt.setPower(-gamepad2.left_stick_y);
 
         }
         else{
 
-            elevatorTilt.setPower(gamepad2.left_stick_y);
-
 
         }
 
-        if(gamepad2.right_bumper){
+        elevatorMotor.setPower(-gamepad2.right_stick_y);
 
-            elevatorMotor.setPower((gamepad2.right_stick_y * 0.5));
 
-        }
-        else{
-
-            elevatorMotor.setPower(gamepad2.right_stick_y);
-
-        }
 
 
 
@@ -220,7 +221,7 @@ public class MechanumOpMode extends OpMode {
 
 
         //Runs the claw Servo
-        if(gamepad2.x){
+        if(gamepad2.right_bumper){
             clawServo.setPosition(0.5);
 
         }
@@ -285,8 +286,8 @@ public class MechanumOpMode extends OpMode {
 //        }
 
 
-        elevatorTilt.setTargetPosition(2000);
-        elevatorTilt.setPower(1.0);
+//        elevatorTilt.setTargetPosition(2000);
+//        elevatorTilt.setPower(1.0);
 
 
 

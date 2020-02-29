@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.mecanum.SampleMecanumDriv
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.mecanum.SampleMecanumDriveREVOptimized;
 
 
-@Autonomous(name="RedAutoFeeder", group="GodBot")
+@Autonomous(name="BlueAutoFeeder", group="GodBot")
 
 public class RedFeederPark extends LinearOpMode {
 
@@ -40,33 +40,19 @@ public class RedFeederPark extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
+        greenWheelRightIntake = hardwareMap.get(DcMotor.class, "rightIntake");
+        greenWheelLeftIntake = hardwareMap.get(DcMotor.class, "leftIntake");
 
+        while(!isStarted()){
+
+            telemetry.addData(">", "Ready");
+
+        }
+
+        waitForStart();
 
         //Roadrunner REV Optimized Drive Builder
         SampleMecanumDriveBase drive = new SampleMecanumDriveREVOptimized(hardwareMap);
-
-        drive.followTrajectorySync(
-                drive.trajectoryBuilder()
-                        .lineTo(new Vector2d(40,0), new ConstantInterpolator(0))
-                        .build()
-        );
-
-        drive.setPoseEstimate(new Pose2d(0,0,0));
-
-        drive.turnSync(Math.toRadians(-90));
-
-        drive.setPoseEstimate(new Pose2d(0,0,0));
-
-
-        drive.followTrajectorySync(
-                drive.trajectoryBuilder()
-                        .lineTo(new Vector2d(10,0), new ConstantInterpolator(0))
-                        .build()
-        );
-        drive.setPoseEstimate(new Pose2d(0,0,0));
-
-
-        Thread.sleep(15000);
 
         drive.followTrajectorySync(
                 drive.trajectoryBuilder()
@@ -76,7 +62,31 @@ public class RedFeederPark extends LinearOpMode {
 
         drive.setPoseEstimate(new Pose2d(0,0,0));
 
-        drive.turnSync(Math.toRadians(-90));
+        drive.turnSync(Math.toRadians(90));
+
+        drive.setPoseEstimate(new Pose2d(0,0,0));
+
+
+        drive.followTrajectorySync(
+                drive.trajectoryBuilder()
+                        .lineTo(new Vector2d(10,0), new ConstantInterpolator(0))
+                        .build()
+        );
+
+        drive.setPoseEstimate(new Pose2d(0,0,0));
+
+
+        Thread.sleep(20000);
+
+        drive.followTrajectorySync(
+                drive.trajectoryBuilder()
+                        .lineTo(new Vector2d(70,0), new ConstantInterpolator(0))
+                        .build()
+        );
+
+        drive.setPoseEstimate(new Pose2d(0,0,0));
+
+        drive.turnSync(Math.toRadians(90));
 
         drive.setPoseEstimate(new Pose2d(0,0,0));
 
@@ -96,7 +106,7 @@ public class RedFeederPark extends LinearOpMode {
 
         greenWheelRightIntake.setPower(0);
 
-        drive.turnSync(Math.toRadians(-90));
+        drive.turnSync(Math.toRadians(90));
 
         drive.setPoseEstimate(new Pose2d(0,0,0));
 

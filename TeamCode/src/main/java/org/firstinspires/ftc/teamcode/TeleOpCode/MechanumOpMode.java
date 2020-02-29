@@ -32,6 +32,8 @@ public class MechanumOpMode extends OpMode {
     public static Servo leftHooker;
     public static Servo clawServo;
 
+    public static Servo capDropper;
+
 
 
 
@@ -64,6 +66,8 @@ public class MechanumOpMode extends OpMode {
 
 //
         clawServo = hardwareMap.get(Servo.class,"clawServo");
+
+        capDropper = hardwareMap.get(Servo.class, "capDropper");
 //        clawServo2 = hardwareMap.get(Servo.class,"clawServo2");
 
         elevatorTilt.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -263,16 +267,28 @@ public class MechanumOpMode extends OpMode {
 
 
 
-//        if(gamepad2.b){
-//
-//            daHooker.setPosition(NumberVariable.CLAW_END.getNumber());
-//
-//        }
-//        else if(!gamepad2.b){
-//
-//            daHooker.setPosition(NumberVariable.CLAW_START.getNumber());
-//
-//        }
+        if(gamepad2.b){
+
+            rightHooker.setPosition(0.7);
+            leftHooker.setPosition(0.7);
+
+        }
+        else{
+
+            rightHooker.setPosition(0);
+            leftHooker.setPosition(0);
+        }
+
+        if(gamepad2.a){
+
+            capDropper.setPosition(0.7);
+
+        }
+        else{
+
+            capDropper.setPosition(0);
+
+        }
 
 //        if(gamepad2.a){
 //

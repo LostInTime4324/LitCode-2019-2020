@@ -15,7 +15,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.mecanum.SampleMecanumDriv
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.mecanum.SampleMecanumDriveREVOptimized;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Autonomous(name="blueautofeeder", group="GodBot")
+@Autonomous(name="BlueAutoFeeder", group="GodBot")
 
 
 public class BlueFeederPark extends LinearOpMode {
